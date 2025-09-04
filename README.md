@@ -1,142 +1,164 @@
-# Airport Database Management System
+# 🛫 Airport Database Management System
 
-## Overview
-This project involves the design and implementation of a comprehensive Airport Management System using Microsoft SQL Server Management Studio (SSMS) for the database, Django for the backend, and Visual Studio Code for frontend development. The system manages various aspects of airport operations, including passenger information, flight schedules, baggage tracking, security protocols, and more.
+> *A robust, SQL-powered system to streamline passenger, flight, baggage, and airport operations with integrated security and maintenance tracking.*
 
-## 1. Choosing the Topic
-The team considered multiple topics, including CRM, E-Commerce, HR, and others. After discussions, the **Airport Management System** was selected due to its complexity, widespread use, and the learning opportunities it presents.
+---
 
-## 2. Choosing DB Software
-The project uses **Microsoft SQL Server Management Studio (SSMS) 19** for the database due to its integration with Visual Studio Code, advanced security features, and the team's familiarity with the platform.
+## 📖 Overview
 
-## 3. Choosing the Backend Integration Model
-The backend is developed using the **Django Framework**, chosen for its simplicity and compatibility with SSMS and the front-end tools.
+This project presents a **comprehensive Airport Management System** built with:
 
-## 4. Entities and Relationships
-### Entities
-- **Passenger**: Manages passenger details.
-- **Flight**: Contains flight schedules and related information.
-- **Airport**: Manages airport-specific details.
-- **Ticket**: Details about tickets, their types, and prices.
-- **Airline**: Manages airline-specific information.
-- **Security**: Manages security personnel and their roles.
-- **Pilot**: Contains pilot details and qualifications.
-- **Traffic Control**: Manages traffic control towers and personnel.
-- **Luggage**: Manages passenger luggage details.
-- **Fueling Station**: Manages fueling stations and their capacities.
-- **Airport Runway**: Details about the airport runways.
+* 🗄️ **Microsoft SQL Server Management Studio (SSMS 19)** → Database design & management
+* ⚙️ **Django Framework** → Simple Backend integration
+* 💻 **Visual Studio Code** → Frontend development
 
-### 4.1 Building Relations
-Relationships are defined between these entities, such as:
-- **Passenger - Ticket**: One to Many
-- **Flight - Airport**: One to Many
-- **Ticket - Flight**: Many to One
-- **Flight - Airline**: Many to One
-- **Security - Airport**: Many to One
-- **Pilot-Flight**: Many to Many
-- **Luggage - Passenger**: One to Many
+The system covers **passenger management, flight schedules, baggage tracking, security protocols, fueling, maintenance, and resource allocation** — providing a **full-scale airport operations solution**.
 
-### 4.2 Entity Relationship Diagram
-The ERD provides a visual representation of the entities and their relationships.
+---
 
-### 4.3 Relational Schema Diagram
-The schema diagram outlines how the tables relate within the database.
+## 🏗️ Project Foundation
 
-### 4.4 Normalization
-The database schema is normalized to reduce redundancy and improve efficiency.
+### 1️⃣ Choosing the Topic
 
-## 5. Authorization
-### 5.1 User Login, Roles, Privileges, and Authorization
-Four user roles have been defined:
-- **Admin**
-- **Airport Staff**
-- **Security Personnel**
-- **Passengers**
+After exploring CRM, HR, and E-Commerce, the team chose **Airport Management** due to its **complexity, real-world relevance, and extensive learning opportunities**.
 
-Each role has specific privileges and access rights.
+### 2️⃣ Database Software
 
-## 6. Tables
-All entities have corresponding tables in the database, populated with sample data while maintaining data integrity.
+* Chosen DBMS: **SQL Server Management Studio (SSMS 19)**
+* Reasons: Seamless integration with VS Code, advanced security, team familiarity
 
-## 7. Backup and Recovery
-### 7.1 Backup and Recovery Strategy
-A comprehensive backup and recovery strategy is in place, including:
-- **Full Backups**: Weekly backups to two separate locations.
-- **Differential Backups**: Taken every two days during off-peak hours.
-- **Transactional Backups**: Daily log backups for continuous data protection.
-- **Recovery Processes**: Steps for full, differential, and transactional recovery are outlined, ensuring data integrity and minimizing downtime.
+### 3️⃣ Backend Integration
 
-### 7.2 Backup Process
-The backup process involves regular full, differential, and transactional backups stored on-premises and off-site for disaster recovery.
+* **Django Framework** → Selected for simplicity, reliability, and SSMS compatibility
 
-### 7.3 Recovery Process
-The recovery process is designed to restore data efficiently in the event of a failure, with a focus on minimizing downtime.
+---
 
-## 8. Views and Joins
-Views have been created for various scenarios:
-- **Passenger View**: Displays passenger details, luggage, and tickets.
-- **Pilot View**: Displays pilot information and associated flights.
-- **Runway View**: Shows runway usage for scheduled flights.
-- **Flight View**: Shows the number of flights operating on a specific day.
-- **Fueling Station View**: Extracts and checks fueling station data.
+## 🧩 Database Design
 
-## 9. Stored Procedures
-Stored procedures have been implemented for various functions:
-- **Weight Check Procedure**: Adjusts ticket price based on luggage weight.
-- **Security Area Changed Procedure**: Updates security personnel locations.
-- **Print Details of First Five Passengers Procedure**: Displays the first five passengers.
-- **Show Information of Passengers & Their Luggage Procedure**: Displays passenger and luggage details.
-- **Number of Flights Booked Procedure**: Displays booked flights.
-- **Lighting System Check**: Checks the functionality of lighting systems.
+### 🔹 Entities
 
-## 10. Triggers
-Triggers have been created for scenarios such as:
-- **Passenger-Ticket Trigger**: Checks for ticket availability.
-- **Ticket Upgradation Trigger**: Handles ticket upgrades.
-- **Flight Delay Trigger**: Notifies passengers of flight delays.
-- **Luggage Weight Check Trigger**: Checks for luggage weight limits.
-- **Fuel Monitoring Trigger**: Monitors fuel levels in aircraft.
+* 👤 **Passenger** → personal info & linked tickets
+* ✈️ **Flight** → schedules & details
+* 🏢 **Airport** → airport-specific info
+* 🎟️ **Ticket** → pricing & type
+* 🏷️ **Airline** → airline data
+* 🛡️ **Security** → personnel & zones
+* 👨‍✈️ **Pilot** → qualifications & flight assignments
+* 📡 **Traffic Control** → towers & controllers
+* 🧳 **Luggage** → passenger baggage info
+* ⛽ **Fueling Station** → station data & capacity
+* 🛣️ **Runway** → availability & usage
 
-## 11. Indexing
-Indexes have been created to optimize database performance:
-- **Clustered Indexing**: Automatically created on primary keys.
-- **Non-clustered Indexing**: Created on specific columns like departure times, pilot experience, ticket prices, and fueling stations.
+### 🔹 Relationships
 
-## 12. Objectives
-The database aims to efficiently manage all aspects of airport operations, including passenger information, flight schedules, security, and maintenance.
+* Passenger ↔ Ticket → 1\:M
+* Flight ↔ Airport → 1\:M
+* Ticket ↔ Flight → M:1
+* Flight ↔ Airline → M:1
+* Pilot ↔ Flight → M\:M
+* Passenger ↔ Luggage → 1\:M
 
-## 13. Scope of the Database
-The database system covers various airport operations, from passenger management to flight tracking, security protocols, and resource allocation.
+### 🔹 Visuals
 
-## 14. Key Functionalities
-- **Passenger Management**: Manages passenger details, ticketing, and check-ins.
-- **Flight Operations**: Tracks flight schedules and pilot assignments.
-- **Baggage Tracking**: Ensures accurate tracking of passenger baggage.
-- **Security Protocols**: Monitors and enforces airport security measures.
-- **Maintenance Tracking**: Schedules and tracks airport equipment maintenance.
-- **Communication**: Facilitates communication between airport departments.
+* 📊 **ERD** → Entity relationships
+* 🗂️ **Relational Schema** → Table structure
+* 📏 **Normalization** → Reduced redundancy, optimized schema
 
-## 15. Key Interests
-The project was chosen for its complexity and the opportunities it presents for learning about the aviation industry. The team found it engaging to work on various aspects of airport operations, including security, baggage handling, and traffic control.
+---
 
-## 16. Performance and Verification of Database
-### 16.1 Relationship Check
-Subqueries are used to check table relationships.
+## 🔐 Authorization & Roles
 
-### 16.2 Checking Foreign Key Violation
-Processes are in place to ensure no foreign key violations occur.
+Defined **4 user roles** with specific privileges:
 
-### 16.3 Checking Logical Errors
-Logical checks are performed to validate the accuracy of the database.
+* 👨‍💻 **Admin**
+* 👔 **Airport Staff**
+* 🛡️ **Security Personnel**
+* 🧳 **Passengers**
 
-### 16.4 Integrity Check
-Data integrity is maintained throughout the database, ensuring reliable operations.
+---
 
+## 🛠️ Core Features
 
+### 📋 Views & Joins
 
-## Contributers:
-- Abdullah Imran (GitHub: @poetabdullah)
-- Ambreen (GitHub: @AmbreenAmbi04)
+* Passenger View → passenger, luggage & tickets
+* Pilot View → pilot + flights
+* Runway View → runway usage
+* Flight View → daily flight count
+* Fueling View → station data
 
-## Inquiries:
-For any issues, feel free to reach out. 
+### ⚡ Stored Procedures
+
+* Luggage weight check & ticket price adjustment
+* Security area updates
+* Passenger detail reports
+* Flight booking summaries
+* Lighting system checks
+
+### 🚨 Triggers
+
+* Ticket availability checks
+* Ticket upgrades
+* Flight delay notifications
+* Luggage overweight alerts
+* Fuel monitoring
+
+### 📈 Indexing
+
+* Clustered → primary keys
+* Non-clustered → departure times, ticket prices, fueling stations, pilot experience
+
+---
+
+## 💾 Backup & Recovery
+
+* 🔄 **Full Backups** → Weekly, dual locations
+* 📂 **Differential Backups** → Every 2 days
+* 📜 **Transactional Logs** → Daily, continuous protection
+* 🛠️ **Recovery Plans** → Full, differential, transaction log restores for minimal downtime
+
+---
+
+## 🎯 Objectives
+
+* Efficiently manage **passenger info, flights, security, baggage, and maintenance**
+* Provide **integrity, security, and optimized performance**
+* Enable **real-world scalability** for large airports
+
+---
+
+## 🌍 Scope
+
+Covers all **airport operations**:
+✔ Passenger management
+✔ Flight tracking & pilot assignment
+✔ Security enforcement
+✔ Baggage tracking
+✔ Resource allocation (fuel, runways, staff)
+✔ Maintenance scheduling
+
+---
+
+## 🔎 Performance & Validation
+
+* ✅ **Relationship Checks** → Subqueries for referential integrity
+* ❌ **Foreign Key Violation Checks**
+* 🧩 **Logical Error Checks** → Data consistency
+* 🔒 **Integrity Validation** → Ensured across entities
+
+---
+
+## 👥 Contributors
+
+* **Abdullah Imran** → [@poetabdullah](https://github.com/poetabdullah)
+* **Ambreen** → [@AmbreenAmbi04](https://github.com/AmbreenAmbi04)
+
+---
+
+## 📬 Inquiries
+
+For questions or collaboration, feel free to reach out!
+
+---
+
+🔥 This system demonstrates how **SQL + Django + structured database design** can power **complex, mission-critical airport operations**.
